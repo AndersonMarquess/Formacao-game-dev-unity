@@ -11,7 +11,7 @@ public class JogadorController : MonoBehaviour {
         transform.tag = "Jogador";
     }
 
-    void Update() {
+    void FixedUpdate() {
         movimentacao();
     }
 
@@ -23,7 +23,9 @@ public class JogadorController : MonoBehaviour {
         var vertical = Input.GetAxis("Vertical");//Z
 
         Vector3 direcao = new Vector3(horizontal, 0, vertical);
-        transform.Translate(direcao * velocidade * Time.deltaTime);
+
+        var rb = transform.GetComponent<Rigidbody>();
+        rb.MovePosition(rb.position +(direcao * velocidade * Time.deltaTime));
 
         //Verifica se o personagem está parado na posição zero com o vector 3
         var andando = direcao != Vector3.zero;
