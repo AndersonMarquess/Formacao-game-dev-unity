@@ -7,9 +7,7 @@ public class BalaController : MonoBehaviour {
     void FixedUpdate() {
         var rb = transform.GetComponent<Rigidbody>();
 
-        //transform.forward é relativo ao eixo Z do componente
+        //transform.forward é referente ao eixo Z
         rb.MovePosition(rb.position + transform.forward * velocidadeDisparo * Time.deltaTime);
     }
-
-
 }
