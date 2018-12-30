@@ -3,6 +3,7 @@
 public class JogadorController : MonoBehaviour {
 
     public int velocidade = 10;
+    public LayerMask mascaraChao;
 
     /// <summary>
     /// Executa quando o script está sendo carregado e atribui a tag Jogador ao gameobject
@@ -13,6 +14,37 @@ public class JogadorController : MonoBehaviour {
 
     void FixedUpdate() {
         movimentacao();
+        rotacionarComMouse();
+    }
+
+    /// <summary>
+    /// Rotaciona o jogador para direção do ponteiro do mouse
+    /// </summary>
+    private void rotacionarComMouse() {
+        Ray raio = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Mostra a origem e direção do raio, com tamanho multiplicado por 100.
+        Debug.DrawRay(raio.origin, raio.direction * 100, Color.red);
+
+        //Ao encostar no chão
+        RaycastHit impacto;
+
+        //Verifica se encostou no chão, apenas na layer escolhida.
+        if(Physics.Raycast(raio, out impacto, 100, mascaraChao)) {
+            Vector3 posicaoMiraJogador = impacto.point - transform.position;
+            //Mantem o jogador e a mira com ponto de impacto na mesma altura.
+            posicaoMiraJogador.y = transform.position.y;
+
+            atualizaRotacao(posicaoMiraJogador);
+        }
+    }
+
+    /// <summary>
+    /// Atualiza a rotação do jogador
+    /// </summary>
+    /// <param name="posicaoParaRotacionar"></param>
+    private void atualizaRotacao(Vector3 posicaoParaRotacionar) {
+        Quaternion novaRotacao = Quaternion.LookRotation(posicaoParaRotacionar);
+        GetComponent<Rigidbody>().MoveRotation(novaRotacao);
     }
 
     /// <summary>
