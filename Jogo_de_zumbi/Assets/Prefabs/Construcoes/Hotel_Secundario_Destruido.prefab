@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7278041466735820584}
   - component: {fileID: 7278041466737114888}
   - component: {fileID: 7278041466738113992}
+  - component: {fileID: 246405212}
   m_Layer: 0
   m_Name: Hotel_Secundario_Destruido
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278041466736108296}
-  m_LocalRotation: {x: -0, y: 0.70710695, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.70710677}
   m_LocalPosition: {x: -55.04, y: 0, z: -17.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -79,6 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &246405212
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7278041466736108296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 38.76065, y: 5.3428125, z: 13.183177}
+  m_Center: {x: -0.47475147, y: 2.6714058, z: -0.08620834}
 --- !u!1 &7278041466736108298
 GameObject:
   m_ObjectHideFlags: 0
