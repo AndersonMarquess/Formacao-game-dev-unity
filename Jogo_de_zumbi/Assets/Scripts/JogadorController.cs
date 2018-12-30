@@ -1,20 +1,39 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JogadorController : MonoBehaviour {
 
     public int velocidade = 10;
     public LayerMask mascaraChao;
+    public GameObject txtPerdeu;
+    public bool isJogadorVivo = true;
 
     /// <summary>
     /// Executa quando o script está sendo carregado e atribui a tag Jogador ao gameobject
     /// </summary>
     private void Awake() {
         transform.tag = "Jogador";
+        Time.timeScale = 1;
     }
 
     void FixedUpdate() {
         movimentacao();
         rotacionarComMouse();
+    }
+
+    private void Update() {
+        if(isJogadorVivo == false) {
+            if(Input.GetButtonDown("Fire1")) {
+                reiniciarScene();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Carrega a scene no index 0 da build
+    /// </summary>
+    private void reiniciarScene() {
+        SceneManager.LoadScene(0);
     }
 
     /// <summary>
