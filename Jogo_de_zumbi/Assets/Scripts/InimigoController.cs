@@ -10,6 +10,9 @@ public class InimigoController : MonoBehaviour {
     void Start() {
         rb = GetComponent<Rigidbody>();
         alvo = GameObject.FindGameObjectWithTag("Jogador");
+
+        int posicaoSkin = Random.Range(1, 28);//Vai de 1 até 27
+        escolherSkin(posicaoSkin);
     }
 
     void FixedUpdate() {
@@ -67,5 +70,12 @@ public class InimigoController : MonoBehaviour {
         jogadorController.txtPerdeu.SetActive(true);
 
         Time.timeScale = 0;
+    }
+
+    /// <summary>
+    /// Olha dentro do prefab e pega o gameobject na posição escolhida tornando visível.
+    /// </summary>
+    private void escolherSkin(int posicaoSkin) {
+       transform.GetChild(posicaoSkin).gameObject.SetActive(true);
     }
 }
