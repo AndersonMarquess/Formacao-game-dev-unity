@@ -9,12 +9,12 @@ public class CameraController : MonoBehaviour {
     /// Ao iniciar procura o gameobject com nome jogador para ajustar a posição da câmera,
     /// com base no valor da variável compensarDistancia.
     /// </summary>
-    void Start() {
+    private void Start() {
         jogador = GameObject.FindGameObjectWithTag("Jogador");
         compensarDistancia = new Vector3(0, 15, -10);
     }
 
-    void Update() {
+    private void Update() {
         atualizarPosicao();
         olharPlayer();
     }

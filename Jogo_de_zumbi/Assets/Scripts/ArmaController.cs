@@ -5,7 +5,7 @@ public class ArmaController : MonoBehaviour {
     public GameObject bala;
     public GameObject canoArma;
 
-    void Update() {
+    private void Update() {
         atirar();
     }
 

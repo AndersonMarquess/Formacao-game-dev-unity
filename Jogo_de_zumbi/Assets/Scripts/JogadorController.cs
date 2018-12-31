@@ -7,6 +7,8 @@ public class JogadorController : MonoBehaviour {
     public LayerMask mascaraChao;
     public GameObject txtPerdeu;
     public bool isJogadorVivo = true;
+    private Rigidbody rb;
+    private Animator animator;
 
     /// <summary>
     /// Executa quando o script está sendo carregado e atribui a tag Jogador ao gameobject
@@ -16,7 +18,12 @@ public class JogadorController : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    void FixedUpdate() {
+    private void Start() {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate() {
         movimentacao();
         rotacionarComMouse();
     }
@@ -63,7 +70,7 @@ public class JogadorController : MonoBehaviour {
     /// <param name="posicaoParaRotacionar"></param>
     private void atualizaRotacao(Vector3 posicaoParaRotacionar) {
         Quaternion novaRotacao = Quaternion.LookRotation(posicaoParaRotacionar);
-        GetComponent<Rigidbody>().MoveRotation(novaRotacao);
+        rb.MoveRotation(novaRotacao);
     }
 
     /// <summary>
@@ -75,7 +82,6 @@ public class JogadorController : MonoBehaviour {
 
         Vector3 direcao = new Vector3(horizontal, 0, vertical);
 
-        var rb = transform.GetComponent<Rigidbody>();
         rb.MovePosition(rb.position +(direcao * velocidade * Time.deltaTime));
 
         //Verifica se o personagem está parado na posição zero com o vector 3
@@ -84,6 +90,6 @@ public class JogadorController : MonoBehaviour {
     }
 
     private void tocarAnimacaoAndar(bool resultado) {
-        transform.GetComponent<Animator>().SetBool("Andando", resultado);
+        animator.SetBool("Andando", resultado);
     }
 }

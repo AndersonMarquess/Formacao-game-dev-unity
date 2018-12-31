@@ -4,9 +4,9 @@ public class GeradorZumbis : MonoBehaviour {
 
     public GameObject zumbi;
     public float tempoRespawn = 2f;
-    float contadorTempo = 0f;
+    private float contadorTempo = 0f;
 
-    void Update() {
+    private void Update() {
         instanciarZumbi();
     }
 

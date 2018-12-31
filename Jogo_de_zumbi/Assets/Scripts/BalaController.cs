@@ -3,10 +3,13 @@
 public class BalaController : MonoBehaviour {
 
     public float velocidadeDisparo = 20;
+    private Rigidbody rb;
 
-    void FixedUpdate() {
-        var rb = transform.GetComponent<Rigidbody>();
+    private void Start() {
+        rb = transform.GetComponent<Rigidbody>();
+    }
 
+    private void FixedUpdate() {
         //transform.forward é referente ao eixo Z
         rb.MovePosition(rb.position + transform.forward * velocidadeDisparo * Time.deltaTime);
     }
