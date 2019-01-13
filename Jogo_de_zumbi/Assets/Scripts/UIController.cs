@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour {
     void Start() {
         jogadorController = GameObject.FindWithTag("Jogador").GetComponent<JogadorController>();
         barraVidaJogador.maxValue = jogadorController.vida;
+        atualizarBarraVidaJogador();
     }
 
     /// <summary>
