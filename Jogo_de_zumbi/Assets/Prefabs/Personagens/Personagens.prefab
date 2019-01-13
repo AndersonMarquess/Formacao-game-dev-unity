@@ -2581,7 +2581,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   txtPerdeu: {fileID: 0}
-  isJogadorVivo: 1
+  vida: 0
+  uIController: {fileID: 0}
 --- !u!114 &7216194178020264056
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class JogadorController : MonoBehaviour {
     private Rigidbody rb;
     private Animator animator;
     public int vida;
+    public UIController uIController;
 
     /// <summary>
     /// Executa quando o script está sendo carregado e atribui a tag "Jogador" ao gameobject.
@@ -97,10 +98,12 @@ public class JogadorController : MonoBehaviour {
 
     /// <summary>
     /// Subtrai um valor da vida do jogador, quando o personagem sofrer algum dano.
+    /// Atualiza a barra de vida do jogador.
     /// Verifica se a vida é menor que zero, e informa que o jogador perdeu.
     /// </summary>
     public void sofrerDano(int dano) {
         vida -= dano;
+        uIController.atualizarBarraVidaJogador();
 
         if(vida <= 0) {
             txtPerdeu.SetActive(true);
