@@ -68,10 +68,7 @@ public class InimigoController : MonoBehaviour {
     /// </summary>
     private void atacouJogador() {
         var jogadorController = alvo.GetComponent<JogadorController>();
-        jogadorController.isJogadorVivo = false;
-        jogadorController.txtPerdeu.SetActive(true);
-
-        Time.timeScale = 0;
+        jogadorController.sofrerDano();
     }
 
     /// <summary>

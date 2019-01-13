@@ -9,12 +9,15 @@ public class JogadorController : MonoBehaviour {
     public bool isJogadorVivo = true;
     private Rigidbody rb;
     private Animator animator;
+    public int vida;
 
     /// <summary>
-    /// Executa quando o script está sendo carregado e atribui a tag Jogador ao gameobject
+    /// Executa quando o script está sendo carregado e atribui a tag "Jogador" ao gameobject.
+    /// Atribui o valor inicial da vida do jogador.
     /// </summary>
     private void Awake() {
         transform.tag = "Jogador";
+        vida = 100;
         Time.timeScale = 1;
     }
 
@@ -91,5 +94,12 @@ public class JogadorController : MonoBehaviour {
 
     private void tocarAnimacaoAndar(bool resultado) {
         animator.SetBool("Andando", resultado);
+    }
+
+    /// <summary>
+    /// Subtrai um valor da vida do jogador, quando o personagem sofrer algum dano.
+    /// </summary>
+    public void sofrerDano() {
+        vida -= 30;
     }
 }
