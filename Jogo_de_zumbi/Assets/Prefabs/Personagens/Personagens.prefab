@@ -2583,6 +2583,7 @@ MonoBehaviour:
   txtPerdeu: {fileID: 0}
   vida: 0
   uIController: {fileID: 0}
+  somDeDano: {fileID: 8300000, guid: c792cbfa06631904a9ea26babe8c49d1, type: 3}
 --- !u!114 &7216194178020264056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2598,6 +2599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bala: {fileID: 149760923875340590, guid: fe225a5ca661f314e8d8afbf24169e05, type: 3}
   canoArma: {fileID: 565056665}
+  somTiro: {fileID: 8300000, guid: 86e67879074abb34299d2f54fd261fec, type: 3}
 --- !u!1 &1938851689004064
 GameObject:
   m_ObjectHideFlags: 0

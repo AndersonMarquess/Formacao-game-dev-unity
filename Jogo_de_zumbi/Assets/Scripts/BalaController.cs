@@ -4,6 +4,7 @@ public class BalaController : MonoBehaviour {
 
     public float velocidadeDisparo = 20;
     private Rigidbody rb;
+    public AudioClip somMorte;
 
     private void Start() {
         rb = transform.GetComponent<Rigidbody>();
@@ -19,8 +20,10 @@ public class BalaController : MonoBehaviour {
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-        if(other.tag == "Inimigo")
+        if(other.tag == "Inimigo") {
+            AudioController.audioSourceGeral.PlayOneShot(somMorte);
             Destroy(other.gameObject);
+        }
 
         Destroy(gameObject);
     }

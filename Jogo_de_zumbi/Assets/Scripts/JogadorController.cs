@@ -10,6 +10,7 @@ public class JogadorController : MonoBehaviour {
     private Animator animator;
     public int vida;
     public UIController uIController;
+    public AudioClip somDeDano;
 
     /// <summary>
     /// Executa quando o script está sendo carregado e atribui a tag "Jogador" ao gameobject.
@@ -99,11 +100,13 @@ public class JogadorController : MonoBehaviour {
     /// <summary>
     /// Subtrai um valor da vida do jogador, quando o personagem sofrer algum dano.
     /// Atualiza a barra de vida do jogador.
+    /// Ativa o som de sofrer dano.
     /// Verifica se a vida é menor que zero, e informa que o jogador perdeu.
     /// </summary>
     public void sofrerDano(int dano) {
         vida -= dano;
         uIController.atualizarBarraVidaJogador();
+        AudioController.audioSourceGeral.PlayOneShot(somDeDano);
 
         if(vida <= 0) {
             txtPerdeu.SetActive(true);
