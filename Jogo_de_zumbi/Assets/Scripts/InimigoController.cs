@@ -68,7 +68,8 @@ public class InimigoController : MonoBehaviour {
     /// </summary>
     private void atacouJogador() {
         var jogadorController = alvo.GetComponent<JogadorController>();
-        jogadorController.sofrerDano();
+        int valorDoDano = Random.Range(20, 31);
+        jogadorController.sofrerDano(valorDoDano);
     }
 
     /// <summary>

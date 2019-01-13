@@ -6,7 +6,6 @@ public class JogadorController : MonoBehaviour {
     public int velocidade = 10;
     public LayerMask mascaraChao;
     public GameObject txtPerdeu;
-    public bool isJogadorVivo = true;
     private Rigidbody rb;
     private Animator animator;
     public int vida;
@@ -32,7 +31,7 @@ public class JogadorController : MonoBehaviour {
     }
 
     private void Update() {
-        if(isJogadorVivo == false) {
+        if(vida <= 0) {
             if(Input.GetButtonDown("Fire1")) {
                 reiniciarScene();
             }
@@ -85,7 +84,7 @@ public class JogadorController : MonoBehaviour {
 
         Vector3 direcao = new Vector3(horizontal, 0, vertical);
 
-        rb.MovePosition(rb.position +(direcao * velocidade * Time.deltaTime));
+        rb.MovePosition(rb.position + (direcao * velocidade * Time.deltaTime));
 
         //Verifica se o personagem está parado na posição zero com o vector 3
         var andando = direcao != Vector3.zero;
@@ -98,8 +97,14 @@ public class JogadorController : MonoBehaviour {
 
     /// <summary>
     /// Subtrai um valor da vida do jogador, quando o personagem sofrer algum dano.
+    /// Verifica se a vida é menor que zero, e informa que o jogador perdeu.
     /// </summary>
-    public void sofrerDano() {
-        vida -= 30;
+    public void sofrerDano(int dano) {
+        vida -= dano;
+
+        if(vida <= 0) {
+            txtPerdeu.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 }
