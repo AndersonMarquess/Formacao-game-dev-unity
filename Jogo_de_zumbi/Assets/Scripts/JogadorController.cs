@@ -15,7 +15,7 @@ public class JogadorController : MonoBehaviour, IMatavel {
     /// Executa quando o script está sendo carregado e atribui a tag "Jogador" ao gameobject.
     /// </summary>
     private void Awake() {
-        transform.tag = "Jogador";
+        transform.tag = Tags.Jogador;
         Time.timeScale = 1;
     }
 

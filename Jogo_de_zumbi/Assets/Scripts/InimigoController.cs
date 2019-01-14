@@ -13,7 +13,7 @@ public class InimigoController : MonoBehaviour, IMatavel {
         _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
         _animacaoPersonagemController = GetComponent<AnimacaoPersonagemController>();
         _status = GetComponent<Status>();
-        alvo = GameObject.FindGameObjectWithTag("Jogador");
+        alvo = GameObject.FindGameObjectWithTag(Tags.Jogador);
 
         int posicaoSkin = Random.Range(1, 28);//Vai de 1 até 27
         escolherSkin(posicaoSkin);
