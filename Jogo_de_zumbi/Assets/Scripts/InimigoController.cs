@@ -7,10 +7,12 @@ public class InimigoController : MonoBehaviour {
     public float velocidadeMovimentacao = 3;
     public float distanciaParada = 2.3f;
     private Animator animator;
+    private MovimentacaoPersonagemController _movimentacaoController;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
         alvo = GameObject.FindGameObjectWithTag("Jogador");
 
         int posicaoSkin = Random.Range(1, 28);//Vai de 1 até 27
@@ -18,7 +20,7 @@ public class InimigoController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        rotacionarInimigo(direcaoAteOAlvo());
+        _movimentacaoController.rotacionarPersonagem(direcaoAteOAlvo());
 
         var isAlvoLonge = distanciaDoAlvo() > distanciaParada;
         animator.SetBool("Atacando", !isAlvoLonge);
@@ -29,12 +31,11 @@ public class InimigoController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Adiciona força ao rigidbody para mover-se até o alvo.
+    /// Move o personagem até a direção do alvo.
     /// </summary>
     private void seguirAlvo() {
-        rb.MovePosition(rb.position + direcaoAteOAlvo().normalized * velocidadeMovimentacao * Time.deltaTime);
-
-        rotacionarInimigo(direcaoAteOAlvo());
+        _movimentacaoController.moverPersonagem(direcaoAteOAlvo(), velocidadeMovimentacao);
+        _movimentacaoController.rotacionarPersonagem(direcaoAteOAlvo());
     }
 
     /// <summary>
@@ -51,15 +52,6 @@ public class InimigoController : MonoBehaviour {
     /// <returns>float com a distância até o alvo</returns>
     private float distanciaDoAlvo() {
         return Vector3.Distance(transform.position, alvo.transform.position);
-    }
-
-    /// <summary>
-    /// Rotaciona o inimigo na direção do player
-    /// </summary>
-    /// <param name="direcao"></param>
-    private void rotacionarInimigo(Vector3 direcao) {
-        Quaternion rotacao = Quaternion.LookRotation(direcao);
-        rb.MoveRotation(rotacao);
     }
 
     /// <summary>

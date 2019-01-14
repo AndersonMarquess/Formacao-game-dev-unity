@@ -11,6 +11,7 @@ public class JogadorController : MonoBehaviour {
     public int vida;
     public UIController uIController;
     public AudioClip somDeDano;
+    private MovimentacaoPersonagemController _movimentacaoController;
 
     /// <summary>
     /// Executa quando o script está sendo carregado e atribui a tag "Jogador" ao gameobject.
@@ -25,6 +26,7 @@ public class JogadorController : MonoBehaviour {
     private void Start() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
     }
 
     private void FixedUpdate() {
@@ -64,17 +66,8 @@ public class JogadorController : MonoBehaviour {
             //Mantem o jogador e a mira com ponto de impacto na mesma altura.
             posicaoMiraJogador.y = transform.position.y;
 
-            atualizaRotacao(posicaoMiraJogador);
+            _movimentacaoController.rotacionarPersonagem(posicaoMiraJogador);
         }
-    }
-
-    /// <summary>
-    /// Atualiza a rotação do jogador
-    /// </summary>
-    /// <param name="posicaoParaRotacionar"></param>
-    private void atualizaRotacao(Vector3 posicaoParaRotacionar) {
-        Quaternion novaRotacao = Quaternion.LookRotation(posicaoParaRotacionar);
-        rb.MoveRotation(novaRotacao);
     }
 
     /// <summary>
@@ -86,7 +79,7 @@ public class JogadorController : MonoBehaviour {
 
         Vector3 direcao = new Vector3(horizontal, 0, vertical);
 
-        rb.MovePosition(rb.position + (direcao * velocidade * Time.deltaTime));
+        _movimentacaoController.moverPersonagem(direcao, velocidade);
 
         //Verifica se o personagem está parado na posição zero com o vector 3
         var andando = direcao != Vector3.zero;

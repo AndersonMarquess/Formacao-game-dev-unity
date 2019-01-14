@@ -9331,7 +9331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zumbi: {fileID: 1063500868937916, guid: 35861510587b7489780fe86970823679, type: 3}
-  tempoRespawn: 1
+  tempoRespawn: 3
 --- !u!4 &1338579692
 Transform:
   m_ObjectHideFlags: 0
@@ -9853,7 +9853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zumbi: {fileID: 1063500868937916, guid: 35861510587b7489780fe86970823679, type: 3}
-  tempoRespawn: 3
+  tempoRespawn: 5
 --- !u!4 &1430453891
 Transform:
   m_ObjectHideFlags: 0

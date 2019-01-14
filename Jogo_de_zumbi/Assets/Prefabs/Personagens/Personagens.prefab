@@ -2470,6 +2470,7 @@ GameObject:
   - component: {fileID: 558145546}
   - component: {fileID: 558145544}
   - component: {fileID: 7216194178020264056}
+  - component: {fileID: 7461086571665513261}
   m_Layer: 0
   m_Name: Personagens
   m_TagString: Untagged
@@ -2600,6 +2601,19 @@ MonoBehaviour:
   bala: {fileID: 149760923875340590, guid: fe225a5ca661f314e8d8afbf24169e05, type: 3}
   canoArma: {fileID: 565056665}
   somTiro: {fileID: 8300000, guid: 86e67879074abb34299d2f54fd261fec, type: 3}
+--- !u!114 &7461086571665513261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884102019447498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: de962022f58b9664cb780b2eb6c6809a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1938851689004064
 GameObject:
   m_ObjectHideFlags: 0
