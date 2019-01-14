@@ -8,11 +8,13 @@ public class InimigoController : MonoBehaviour {
     public float distanciaParada = 2.3f;
     private Animator animator;
     private MovimentacaoPersonagemController _movimentacaoController;
+    private AnimacaoPersonagemController _animacaoPersonagemController;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
+        _animacaoPersonagemController = GetComponent<AnimacaoPersonagemController>();
         alvo = GameObject.FindGameObjectWithTag("Jogador");
 
         int posicaoSkin = Random.Range(1, 28);//Vai de 1 até 27
@@ -21,9 +23,8 @@ public class InimigoController : MonoBehaviour {
 
     private void FixedUpdate() {
         _movimentacaoController.rotacionarPersonagem(direcaoAteOAlvo());
-
         var isAlvoLonge = distanciaDoAlvo() > distanciaParada;
-        animator.SetBool("Atacando", !isAlvoLonge);
+        _animacaoPersonagemController.tocarAnimAtacar(!isAlvoLonge);
 
         if(isAlvoLonge) {
             seguirAlvo();
