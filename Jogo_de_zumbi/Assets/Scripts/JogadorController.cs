@@ -1,41 +1,39 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class JogadorController : MonoBehaviour {
+public class JogadorController : MonoBehaviour, IMatavel {
 
-    public int velocidade = 10;
     public LayerMask mascaraChao;
     public GameObject txtPerdeu;
-    public int vida;
     public UIController uIController;
     public AudioClip somDeDano;
     private MovimentacaoJogador _movimentacaoJogador;
     private AnimacaoPersonagemController _animacaoPersonagemController;
+    public Status status;
 
     /// <summary>
     /// Executa quando o script está sendo carregado e atribui a tag "Jogador" ao gameobject.
-    /// Atribui o valor inicial da vida do jogador.
     /// </summary>
     private void Awake() {
         transform.tag = "Jogador";
-        vida = 100;
         Time.timeScale = 1;
     }
 
     private void Start() {
         _movimentacaoJogador = GetComponent<MovimentacaoJogador>();
         _animacaoPersonagemController = GetComponent<AnimacaoPersonagemController>();
+        status = GetComponent<Status>();
     }
 
     private void FixedUpdate() {
-        var andando = _movimentacaoJogador.movimentacao(velocidade);
+        var andando = _movimentacaoJogador.movimentacao(status.velocidade);
         _animacaoPersonagemController.tocarAnimAndar(andando.magnitude);
 
         _movimentacaoJogador.rotacionarComMouse(mascaraChao);
     }
 
     private void Update() {
-        if(vida <= 0) {
+        if(status.vidaAtual <= 0) {
             if(Input.GetButtonDown("Fire1")) {
                 reiniciarScene();
             }
@@ -53,16 +51,23 @@ public class JogadorController : MonoBehaviour {
     /// Subtrai um valor da vida do jogador, quando o personagem sofrer algum dano.
     /// Atualiza a barra de vida do jogador.
     /// Ativa o som de sofrer dano.
-    /// Verifica se a vida é menor que zero, e informa que o jogador perdeu.
+    /// Se a vida for igual ou menor que zero, o método de morrer é chamado.
     /// </summary>
     public void sofrerDano(int dano) {
-        vida -= dano;
+        status.vidaAtual -= dano;
         uIController.atualizarBarraVidaJogador();
         AudioController.audioSourceGeral.PlayOneShot(somDeDano);
 
-        if(vida <= 0) {
-            txtPerdeu.SetActive(true);
-            Time.timeScale = 0;
+        if(status.vidaAtual <= 0) {
+            morrer();
         }
+    }
+
+    /// <summary>
+    /// Ativa o texto de morte e pausa o tempo do jogo.
+    /// </summary>
+    public void morrer() {
+        txtPerdeu.SetActive(true);
+        Time.timeScale = 0;
     }
 }

@@ -532,8 +532,9 @@ GameObject:
   - component: {fileID: 4941635705825534}
   - component: {fileID: 4315882670117496548}
   - component: {fileID: 1255426673}
-  - component: {fileID: 2342936871215337185}
   - component: {fileID: 4762195290478695271}
+  - component: {fileID: 2342936871215337185}
+  - component: {fileID: 9191384925183893299}
   - component: {fileID: 7065758765870772794}
   - component: {fileID: 7409794483188122760}
   m_Layer: 0
@@ -618,21 +619,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2342936871215337185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063500868937916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: ce131e587f952ab4cad36832617deefa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadeMovimentacao: 3
-  distanciaParada: 2.3
 --- !u!54 &4762195290478695271
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -649,6 +635,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &2342936871215337185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063500868937916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: ce131e587f952ab4cad36832617deefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanciaParada: 2.4
+  somMorte: {fileID: 8300000, guid: 08d822880ad29a24b9d012e06ce33bd1, type: 3}
+--- !u!114 &9191384925183893299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063500868937916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 842898381e007cf478b1da5a71d91f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidade: 3
+  vidaTotal: 1
+  vidaAtual: 0
 --- !u!114 &7065758765870772794
 MonoBehaviour:
   m_ObjectHideFlags: 0

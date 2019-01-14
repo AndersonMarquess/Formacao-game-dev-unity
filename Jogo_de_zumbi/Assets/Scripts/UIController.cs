@@ -8,19 +8,19 @@ public class UIController : MonoBehaviour {
 
     /// <summary>
     /// Procura a referência para variável jogadorController 
-    /// e atribui o valor máximo da barra de vida do jogador.
+    /// e atribui o valor máximo da barra, equivalente ao valor inicial da vida do jogador.
     /// </summary>
     void Start() {
         jogadorController = GameObject.FindWithTag("Jogador").GetComponent<JogadorController>();
-        barraVidaJogador.maxValue = jogadorController.vida;
+        barraVidaJogador.maxValue = jogadorController.status.vidaTotal;
         atualizarBarraVidaJogador();
     }
 
     /// <summary>
-    /// Atualizar o valor atual da barra de vida do jogador, 
-    /// com base na vida do jogador presente no script de JogadorController.
+    /// Atualiza o valor atual da barra de vida do jogador, 
+    /// com base no valor da vida do jogador presente no script status.
     /// </summary>
     public void atualizarBarraVidaJogador() {
-        barraVidaJogador.value = jogadorController.vida;
+        barraVidaJogador.value = jogadorController.status.vidaAtual;
     }
 }

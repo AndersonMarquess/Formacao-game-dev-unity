@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 
-public class InimigoController : MonoBehaviour {
+public class InimigoController : MonoBehaviour, IMatavel {
 
     private GameObject alvo;
-    private Rigidbody rb;
-    public float velocidadeMovimentacao = 3;
-    public float distanciaParada = 2.3f;
-    private Animator animator;
+    public float distanciaParada = 2.4f;
     private MovimentacaoPersonagemController _movimentacaoController;
     private AnimacaoPersonagemController _animacaoPersonagemController;
+    private Status _status;
+    public AudioClip somMorte;
 
     private void Start() {
-        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
         _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
         _animacaoPersonagemController = GetComponent<AnimacaoPersonagemController>();
+        _status = GetComponent<Status>();
         alvo = GameObject.FindGameObjectWithTag("Jogador");
 
         int posicaoSkin = Random.Range(1, 28);//Vai de 1 até 27
@@ -35,7 +33,7 @@ public class InimigoController : MonoBehaviour {
     /// Move o personagem até a direção do alvo.
     /// </summary>
     private void seguirAlvo() {
-        _movimentacaoController.moverPersonagem(direcaoAteOAlvo(), velocidadeMovimentacao);
+        _movimentacaoController.moverPersonagem(direcaoAteOAlvo(), _status.velocidade);
         _movimentacaoController.rotacionarPersonagem(direcaoAteOAlvo());
     }
 
@@ -70,5 +68,26 @@ public class InimigoController : MonoBehaviour {
     /// </summary>
     private void escolherSkin(int posicaoSkin) {
        transform.GetChild(posicaoSkin).gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Subtrai o valor do dano da vida atual, se o resultado for igual ou menor que zero,
+    /// chama o método de morrer.
+    /// </summary>
+    /// <param name="dano"></param>
+    public void sofrerDano(int dano) {
+        _status.vidaAtual -= dano;
+
+        if(_status.vidaAtual <= 0) {
+            morrer();
+        }
+    }
+
+    /// <summary>
+    /// Ativa o som de morte e destrói o gameobject
+    /// </summary>
+    public void morrer() {
+        AudioController.audioSourceGeral.PlayOneShot(somMorte);
+        Destroy(gameObject);
     }
 }
