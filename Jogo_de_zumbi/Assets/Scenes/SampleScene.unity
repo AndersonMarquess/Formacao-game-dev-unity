@@ -3157,7 +3157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zumbi: {fileID: 1063500868937916, guid: 35861510587b7489780fe86970823679, type: 3}
-  tempoRespawn: 2
+  tempoRespawn: 3
 --- !u!4 &439027871
 Transform:
   m_ObjectHideFlags: 0
@@ -3166,7 +3166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439027869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.57, y: 0.1, z: -33.51}
+  m_LocalPosition: {x: -27, y: 0.1, z: 45.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9340,7 +9340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1338579690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.38, y: 0.1, z: -33.51}
+  m_LocalPosition: {x: -17.9, y: 0.1, z: -30.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9853,7 +9853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zumbi: {fileID: 1063500868937916, guid: 35861510587b7489780fe86970823679, type: 3}
-  tempoRespawn: 5
+  tempoRespawn: 4
 --- !u!4 &1430453891
 Transform:
   m_ObjectHideFlags: 0
@@ -9862,7 +9862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430453889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -42.2, y: 0.1, z: -33.51}
+  m_LocalPosition: {x: 14, y: 0.1, z: 26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

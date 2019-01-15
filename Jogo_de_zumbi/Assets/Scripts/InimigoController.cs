@@ -4,10 +4,15 @@ public class InimigoController : MonoBehaviour, IMatavel {
 
     private GameObject alvo;
     public float distanciaParada = 2.4f;
+    public float distanciaDeVisao = 15f;
     private MovimentacaoPersonagemController _movimentacaoController;
     private AnimacaoPersonagemController _animacaoPersonagemController;
     private Status _status;
     public AudioClip somMorte;
+    private Vector3 _posicaoAleatoria;
+    private float _contadorVagar;
+    private float _tempoAteNovaPosicaoAleatoria = 4f;
+
 
     private void Start() {
         _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
@@ -20,13 +25,53 @@ public class InimigoController : MonoBehaviour, IMatavel {
     }
 
     private void FixedUpdate() {
-        _movimentacaoController.rotacionarPersonagem(direcaoAteOAlvo());
-        var isAlvoLonge = distanciaDoAlvo() > distanciaParada;
-        _animacaoPersonagemController.tocarAnimAtacar(!isAlvoLonge);
+        //Se o alvo for visível e estiver mais distante que a parada = seguir
+        var isAlvoVisivel = distanciaDeVisao >= distanciaAteOAlvo(alvo.transform.position);
+        var isAlvoLonge = distanciaAteOAlvo(alvo.transform.position) > distanciaParada;
 
-        if(isAlvoLonge) {
+        if(isAlvoVisivel && isAlvoLonge) {
             seguirAlvo();
+        } else if(!isAlvoVisivel) {
+            vagar();
         }
+
+        _movimentacaoController.rotacionarPersonagem(direcaoAteOAlvo());
+        _animacaoPersonagemController.tocarAnimAtacar(!isAlvoLonge);
+    }
+
+    /// <summary>
+    /// Deixa o personagem andado de forma aleatória.
+    /// </summary>
+    private void vagar() {
+        _contadorVagar -= Time.deltaTime;
+
+        if(_contadorVagar <= 0) {
+            _posicaoAleatoria = gerarPosicaoAleatoria();
+            _contadorVagar = _tempoAteNovaPosicaoAleatoria;
+        }
+
+        var distanciaMinima = 0.2f;
+        var distanciaAlvo = distanciaAteOAlvo(_posicaoAleatoria);
+
+        //Verifica se o inimigo não chegou até o alvo
+        var isAlvoLonge =  distanciaAlvo > distanciaMinima;
+        if(isAlvoLonge) {
+            var direcao = _posicaoAleatoria - transform.position;
+            _movimentacaoController.moverPersonagem(direcao, _status.velocidade);
+        }
+    }
+
+    /// <summary>
+    /// Gera uma posição aleatória, com base em uma área do tamanho de uma esfera * 10;
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 gerarPosicaoAleatoria() {
+        //Gera uma posição dentro de uma esfera
+        Vector3 posicao = Random.insideUnitSphere * 10;
+        posicao += transform.position;
+        posicao.y = transform.position.y;
+
+        return posicao;
     }
 
     /// <summary>
@@ -48,9 +93,10 @@ public class InimigoController : MonoBehaviour, IMatavel {
     /// <summary>
     /// Verifica a distância entre o inimigo e o alvo, retorna o valor da distância.
     /// </summary>
+    /// <param name="alvo">Alvo que será comparado</param>
     /// <returns>float com a distância até o alvo</returns>
-    private float distanciaDoAlvo() {
-        return Vector3.Distance(transform.position, alvo.transform.position);
+    private float distanciaAteOAlvo(Vector3 alvo) {
+        return Vector3.Distance(transform.position, alvo);
     }
 
     /// <summary>
@@ -64,10 +110,10 @@ public class InimigoController : MonoBehaviour, IMatavel {
     }
 
     /// <summary>
-    /// Olha dentro do prefab e pega o gameobject na posição escolhida tornando visível.
+    /// Olha dentro do prefab e pega o gameobject na posição escolhida tornando-o visível.
     /// </summary>
     private void escolherSkin(int posicaoSkin) {
-       transform.GetChild(posicaoSkin).gameObject.SetActive(true);
+        transform.GetChild(posicaoSkin).gameObject.SetActive(true);
     }
 
     /// <summary>

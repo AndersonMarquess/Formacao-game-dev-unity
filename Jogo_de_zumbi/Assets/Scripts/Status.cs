@@ -11,7 +11,7 @@ public class Status : MonoBehaviour {
     [HideInInspector]
     public int vidaAtual;
 
-    private void Start() {
+    private void Awake() {
         vidaAtual = vidaTotal;
     }
 }
