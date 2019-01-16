@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class JogadorController : MonoBehaviour, IMatavel {
 
     public LayerMask mascaraChao;
-    public GameObject txtPerdeu;
     public UIController uIController;
     public AudioClip somDeDano;
     private MovimentacaoJogador _movimentacaoJogador;
@@ -16,7 +14,6 @@ public class JogadorController : MonoBehaviour, IMatavel {
     /// </summary>
     private void Awake() {
         transform.tag = Tags.Jogador;
-        Time.timeScale = 1;
     }
 
     private void Start() {
@@ -30,21 +27,6 @@ public class JogadorController : MonoBehaviour, IMatavel {
         _animacaoPersonagemController.tocarAnimAndar(andando.magnitude);
 
         _movimentacaoJogador.rotacionarComMouse(mascaraChao);
-    }
-
-    private void Update() {
-        if(status.vidaAtual <= 0) {
-            if(Input.GetButtonDown("Fire1")) {
-                reiniciarScene();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Carrega a scene no index 0 da build
-    /// </summary>
-    private void reiniciarScene() {
-        SceneManager.LoadScene(0);
     }
 
     /// <summary>
@@ -64,10 +46,9 @@ public class JogadorController : MonoBehaviour, IMatavel {
     }
 
     /// <summary>
-    /// Ativa o texto de morte e pausa o tempo do jogo.
+    /// Chama o método de informações do gameover.
     /// </summary>
     public void morrer() {
-        txtPerdeu.SetActive(true);
-        Time.timeScale = 0;
+        uIController.mostrarPainelGameOver();
     }
 }
