@@ -11577,7 +11577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 10
-  vidaTotal: 100
+  vidaTotal: 10
   vidaAtual: 0
 --- !u!1 &1691504265
 GameObject:
@@ -13735,6 +13735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barraVidaJogador: {fileID: 317357231}
   painelGameOver: {fileID: 2132429983}
+  textoTempoSobrevivido: {fileID: 1827600643}
 --- !u!4 &1992667666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4656246329960846, guid: bf4e53320739441f58d231c2ee884b66,

@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour {
     private JogadorController jogadorController;
     public Slider barraVidaJogador;
     public GameObject painelGameOver;
+    public Text textoTempoSobrevivido;
 
     /// <summary>
     /// Procura a referência para variável jogadorController 
@@ -31,8 +32,29 @@ public class UIController : MonoBehaviour {
     /// Ativa o painel com a mensagem de game over.
     /// </summary>
     public void mostrarPainelGameOver() {
-        painelGameOver.SetActive(true);
         Time.timeScale = 0;
+        painelGameOver.SetActive(true);
+        atualizarTextoTempoSobrevivido();
+    }
+
+    /// <summary>
+    /// Atualizar o texto com a duração da partida até a hora da morte.
+    /// </summary>
+    private void atualizarTextoTempoSobrevivido() {
+        textoTempoSobrevivido.text = $"Você sobreviveu por {calcularTempoSobrevivido()}";
+    }
+
+    /// <summary>
+    /// Calcula o tempo desde o carregamento do level, divide por 60 e obtêm os minutos
+    /// Divide por 60 e pega apenas o resto da divisão para considerar como segundos.
+    /// </summary>
+    /// <returns></returns>
+    private string calcularTempoSobrevivido() {
+        //Conta quanto tempo desde o load da scene.
+        var minutos = (int) Time.timeSinceLevelLoad / 60;
+        var segundos = (int) Time.timeSinceLevelLoad % 60;
+        
+        return $"{minutos}m e {segundos}s";
     }
 
     /// <summary>
