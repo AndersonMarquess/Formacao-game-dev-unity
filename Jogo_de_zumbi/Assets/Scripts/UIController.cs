@@ -98,7 +98,7 @@ public class UIController : MonoBehaviour {
     /// Atualiza o texto com o tempo recorde.
     /// </summary>
     private void atualizarTextRecorde() {
-        textoTempoRecorde.text = $"Recorde anterior: {calcularTempoSobrevivido(recuperarTempoRecorde())}";
+        textoTempoRecorde.text = $"Recorde anterior {calcularTempoSobrevivido(recuperarTempoRecorde())}";
     }
 
     /// <summary>
