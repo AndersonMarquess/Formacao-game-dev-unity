@@ -10,8 +10,10 @@ public class GeradorZumbis : MonoBehaviour {
     private float _diametroPosicaoAleatoria = 3;
     private float _distanciaAteJogadorParaGerarZumbi = 20;
     private GameObject _jogador;
-    private int qtdMaximaZumbisEmCena = 3;
-    private int qtdDeZumbisEmCena;
+    private int _qtdMaximaZumbisEmCena = 3;
+    private int _qtdDeZumbisEmCena;
+    private float _tempoAjusteQtdZumbisEmCena = 5;
+    private float _contadorQtdZumbisEmCena;
 
 
     /// <summary>
@@ -19,8 +21,9 @@ public class GeradorZumbis : MonoBehaviour {
     /// </summary>
     private void Start() {
         _jogador = GameObject.FindWithTag(Tags.Jogador);
+        _contadorQtdZumbisEmCena = _tempoAjusteQtdZumbisEmCena;
 
-        for(int i = 0; i < qtdMaximaZumbisEmCena; i++) {
+        for(int i = 0; i < _qtdMaximaZumbisEmCena; i++) {
             StartCoroutine(gerarZumbi());
         }
     }
@@ -30,6 +33,15 @@ public class GeradorZumbis : MonoBehaviour {
         if(distanciaJogador > _distanciaAteJogadorParaGerarZumbi) {
             instanciarZumbi();
         }
+
+        if(Time.timeSinceLevelLoad >= _contadorQtdZumbisEmCena) {
+            aumentarZumbisEmCena();
+            _contadorQtdZumbisEmCena = Time.timeSinceLevelLoad + _tempoAjusteQtdZumbisEmCena;
+        }
+    }
+
+    private void aumentarZumbisEmCena() {
+        _qtdMaximaZumbisEmCena++;
     }
 
     /// <summary>
@@ -71,7 +83,7 @@ public class GeradorZumbis : MonoBehaviour {
         InimigoController inimigoController = Instantiate(zumbi, novaPosicao, transform.rotation)
             .GetComponent<InimigoController>();
         inimigoController.meuGeradorZumbi = this;
-        qtdDeZumbisEmCena++;
+        _qtdDeZumbisEmCena++;
     }
 
     private void OnDrawGizmos() {
@@ -108,10 +120,10 @@ public class GeradorZumbis : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     private bool isPermitidoGerarNovosZumbis() {
-        return qtdDeZumbisEmCena < qtdMaximaZumbisEmCena;
+        return _qtdDeZumbisEmCena < _qtdMaximaZumbisEmCena;
     }
 
     public void diminuirQtdZumbisEmCena() {
-        qtdDeZumbisEmCena--;
+        _qtdDeZumbisEmCena--;
     }
 }
