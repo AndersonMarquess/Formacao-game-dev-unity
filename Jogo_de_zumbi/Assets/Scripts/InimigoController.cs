@@ -14,12 +14,15 @@ public class InimigoController : MonoBehaviour, IMatavel {
     private float _tempoAteNovaPosicaoAleatoria = 4f;
     private float _porcentagemGerarKitMedico = 0.1f;
     public GameObject kitMedico;
+    private UIController _uIController;
 
     private void Start() {
         _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
         _animacaoPersonagemController = GetComponent<AnimacaoPersonagemController>();
         _status = GetComponent<Status>();
         alvo = GameObject.FindGameObjectWithTag(Tags.Jogador);
+        //Procura na cena o objeto do tipo especificado
+        _uIController = FindObjectOfType(typeof(UIController)) as UIController;
 
         int posicaoSkin = Random.Range(1, 28);//Vai de 1 até 27
         escolherSkin(posicaoSkin);
@@ -131,11 +134,14 @@ public class InimigoController : MonoBehaviour, IMatavel {
     }
 
     /// <summary>
-    /// Ativa o som de morte e destrói o gameobject
+    /// Ativa o som de morte e destrói o gameobject.
+    /// Chama o método com uma chance de dropar um kit médico.
+    /// informa para o controlador de interface que um zumbi foi morto.
     /// </summary>
     public void morrer() {
         AudioController.audioSourceGeral.PlayOneShot(somMorte);
         gerarKitMedico(_porcentagemGerarKitMedico);
+        _uIController.atualizarQtdZumbisMortos();
         Destroy(gameObject);
     }
 

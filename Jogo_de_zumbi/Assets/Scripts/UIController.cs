@@ -4,23 +4,25 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
 
-    private JogadorController jogadorController;
+    private JogadorController _jogadorController;
     public Slider barraVidaJogador;
     public GameObject painelGameOver;
     public Text textoTempoSobrevivido;
     public Text textoTempoRecorde;
-    private float tempoRecorde;
+    private float _tempoRecorde;
+    private int _qtdZumbisMortos = 0;
+    public Text textoQtdZumbisMortos;
 
     /// <summary>
     /// Procura a referência para variável jogadorController 
     /// e atribui o valor máximo da barra, equivalente ao valor inicial da vida do jogador.
     /// </summary>
     void Start() {
-        jogadorController = GameObject.FindWithTag("Jogador").GetComponent<JogadorController>();
-        barraVidaJogador.maxValue = jogadorController.status.vidaTotal;
+        _jogadorController = GameObject.FindWithTag("Jogador").GetComponent<JogadorController>();
+        barraVidaJogador.maxValue = _jogadorController.status.vidaTotal;
         atualizarBarraVidaJogador();
         Time.timeScale = 1;
-        tempoRecorde = recuperarTempoRecorde();
+        _tempoRecorde = recuperarTempoRecorde();
     }
 
     /// <summary>
@@ -28,7 +30,7 @@ public class UIController : MonoBehaviour {
     /// com base no valor da vida do jogador presente no script status.
     /// </summary>
     public void atualizarBarraVidaJogador() {
-        barraVidaJogador.value = jogadorController.status.vidaAtual;
+        barraVidaJogador.value = _jogadorController.status.vidaAtual;
     }
 
     /// <summary>
@@ -71,7 +73,7 @@ public class UIController : MonoBehaviour {
         //Conta quanto tempo desde o load da scene.
         var tempoSobrevivido = (int) Time.timeSinceLevelLoad;
 
-        if( tempoSobrevivido > tempoRecorde) {
+        if( tempoSobrevivido > _tempoRecorde) {
             guardarTempoRecorde(tempoSobrevivido);
         }
         atualizarTextRecorde();
@@ -91,7 +93,7 @@ public class UIController : MonoBehaviour {
     /// </summary>
     /// <returns>float com tempo</returns>
     private float recuperarTempoRecorde() {
-        return PlayerPrefs.GetFloat("tempoRecorde", tempoRecorde);
+        return PlayerPrefs.GetFloat("tempoRecorde", _tempoRecorde);
     }
 
     /// <summary>
@@ -106,5 +108,14 @@ public class UIController : MonoBehaviour {
     /// </summary>
     public void reiniciarScene() {
         SceneManager.LoadScene(0);
+    }
+
+    /// <summary>
+    /// Atualiza no canvas, a quantidade de zumbis mortos durante aquele level.
+    /// </summary>
+    public void atualizarQtdZumbisMortos() {
+        _qtdZumbisMortos++;
+
+        textoQtdZumbisMortos.text = $"x {_qtdZumbisMortos}";
     }
 }
