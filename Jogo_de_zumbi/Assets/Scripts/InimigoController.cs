@@ -53,7 +53,7 @@ public class InimigoController : MonoBehaviour, IMatavel {
 
         if(_contadorVagar <= 0) {
             _posicaoAleatoria = gerarPosicaoAleatoria();
-            _contadorVagar = _tempoAteNovaPosicaoAleatoria;
+            _contadorVagar = _tempoAteNovaPosicaoAleatoria + Random.Range(-1f, 1f);
         }
 
         var distanciaMinima = 0.2f;
@@ -140,13 +140,17 @@ public class InimigoController : MonoBehaviour, IMatavel {
     /// Chama o método com uma chance de dropar um kit médico.
     /// informa para o controlador de interface que um zumbi foi morto.
     /// decrementa a quantidade de zumbis em cena no gerador de origem.
+    /// Chama animação de morrer
     /// </summary>
     public void morrer() {
+        Destroy(gameObject, 1.5f);
         AudioController.audioSourceGeral.PlayOneShot(somMorte);
         gerarKitMedico(_porcentagemGerarKitMedico);
         _uIController.atualizarQtdZumbisMortos();
         meuGeradorZumbi.diminuirQtdZumbisEmCena();
-        Destroy(gameObject);
+        _animacaoPersonagemController.tocarAnimMorrer();
+        _movimentacaoController.Morrer();
+        this.enabled = false; //impedi que o zumbi continue seguindo o jogador "após a morte".
     }
 
 

@@ -29,4 +29,13 @@ public class MovimentacaoPersonagemController : MonoBehaviour {
         Quaternion rotacao = Quaternion.LookRotation(direcao);
         _rigidbody.MoveRotation(rotacao);
     }
+
+    /// <summary>
+    ///Desabilita as travas do rigitbody
+    /// </summary>
+    public void Morrer() {
+        //_rigidbody.constraints = RigidbodyConstraints.None;
+        _rigidbody.velocity = Vector3.zero;
+        GetComponent<Collider>().enabled = false;
+    }
 }

@@ -15,4 +15,8 @@ public class AnimacaoPersonagemController : MonoBehaviour {
     public void tocarAnimAndar(float velocidadeMovimento) {
         _animator.SetFloat("Andando", velocidadeMovimento);
     }
+
+    public void tocarAnimMorrer() {
+        _animator.SetTrigger("Morrer");
+    }
 }
