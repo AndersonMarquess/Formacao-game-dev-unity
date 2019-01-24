@@ -12,7 +12,8 @@ public class InimigoController : MonoBehaviour, IMatavel {
     private Vector3 _posicaoAleatoria;
     private float _contadorVagar;
     private float _tempoAteNovaPosicaoAleatoria = 4f;
-
+    private float _porcentagemGerarKitMedico = 0.1f;
+    public GameObject kitMedico;
 
     private void Start() {
         _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
@@ -54,7 +55,7 @@ public class InimigoController : MonoBehaviour, IMatavel {
         var distanciaAlvo = distanciaAteOAlvo(_posicaoAleatoria);
 
         //Verifica se o inimigo não chegou até o alvo
-        var isAlvoLonge =  distanciaAlvo > distanciaMinima;
+        var isAlvoLonge = distanciaAlvo > distanciaMinima;
         if(isAlvoLonge) {
             var direcao = _posicaoAleatoria - transform.position;
             _movimentacaoController.moverPersonagem(direcao, _status.velocidade);
@@ -134,6 +135,18 @@ public class InimigoController : MonoBehaviour, IMatavel {
     /// </summary>
     public void morrer() {
         AudioController.audioSourceGeral.PlayOneShot(somMorte);
+        gerarKitMedico(_porcentagemGerarKitMedico);
         Destroy(gameObject);
+    }
+
+
+    void gerarKitMedico(float chanceDeGerar) {
+
+        //Random.value gera
+        //Quaternion.identity gera uma rotação em 0 0 0
+
+        if(Random.value <= chanceDeGerar) {
+            Instantiate(kitMedico, transform.position, Quaternion.identity);
+        }
     }
 }

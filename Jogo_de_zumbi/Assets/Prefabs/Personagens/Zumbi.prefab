@@ -651,6 +651,7 @@ MonoBehaviour:
   distanciaParada: 2.4
   distanciaDeVisao: 15
   somMorte: {fileID: 8300000, guid: 08d822880ad29a24b9d012e06ce33bd1, type: 3}
+  kitMedico: {fileID: 1060151288946202, guid: 6150c6f66b7034ec5b3672478195682a, type: 3}
 --- !u!114 &9191384925183893299
 MonoBehaviour:
   m_ObjectHideFlags: 0
