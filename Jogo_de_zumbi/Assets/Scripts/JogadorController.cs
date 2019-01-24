@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class JogadorController : MonoBehaviour, IMatavel {
+public class JogadorController : MonoBehaviour, IMatavel, ICuravel {
 
     public LayerMask mascaraChao;
     public UIController uIController;
@@ -50,5 +50,20 @@ public class JogadorController : MonoBehaviour, IMatavel {
     /// </summary>
     public void morrer() {
         uIController.mostrarPainelGameOver();
+    }
+
+    /// <summary>
+    /// Recupera a vida do player.
+    /// Não permite ultrapassar o valor da vida inicial.
+    /// </summary>
+    /// <param name="qtdDeCura"></param>
+    public void curarVida(int qtdDeCura) {
+        status.vidaAtual += qtdDeCura;
+
+        if(status.vidaAtual > status.vidaTotal) {
+            status.vidaAtual = status.vidaTotal;
+        }
+
+        uIController.atualizarBarraVidaJogador();
     }
 }
