@@ -10,9 +10,19 @@ public class GeradorZumbis : MonoBehaviour {
     private float _diametroPosicaoAleatoria = 3;
     private float _distanciaAteJogadorParaGerarZumbi = 20;
     private GameObject _jogador;
+    private int qtdMaximaZumbisEmCena = 3;
+    private int qtdDeZumbisEmCena;
 
+
+    /// <summary>
+    /// Chama o método de criar zumbis no inicio do carregamento.
+    /// </summary>
     private void Start() {
         _jogador = GameObject.FindWithTag(Tags.Jogador);
+
+        for(int i = 0; i < qtdMaximaZumbisEmCena; i++) {
+            StartCoroutine(gerarZumbi());
+        }
     }
 
     private void Update() {
@@ -28,7 +38,9 @@ public class GeradorZumbis : MonoBehaviour {
     /// </summary>
     private void instanciarZumbi() {
         _contadorTempo += Time.deltaTime;
-        if(_contadorTempo >= tempoRespawn) {
+        var isZumbiProntoParaRespawn = _contadorTempo >= tempoRespawn;
+
+        if(isZumbiProntoParaRespawn && isPermitidoGerarNovosZumbis()) {
             _contadorTempo = 0f;
             StartCoroutine(gerarZumbi());
         }
@@ -47,7 +59,19 @@ public class GeradorZumbis : MonoBehaviour {
             yield return null;
         }
 
-        Instantiate(zumbi, novaPosicao, transform.rotation);
+        instanciarZumbiELinkarGerador(novaPosicao);
+    }
+
+    /// <summary>
+    /// Instância um zumbi e faz o link entre este gerador e o zumbi criado.
+    /// Incrementa variável com a quantidade de zumbis.
+    /// </summary>
+    /// <param name="novaPosicao"></param>
+    private void instanciarZumbiELinkarGerador(Vector3 novaPosicao) {
+        InimigoController inimigoController = Instantiate(zumbi, novaPosicao, transform.rotation)
+            .GetComponent<InimigoController>();
+        inimigoController.meuGeradorZumbi = this;
+        qtdDeZumbisEmCena++;
     }
 
     private void OnDrawGizmos() {
@@ -77,5 +101,17 @@ public class GeradorZumbis : MonoBehaviour {
         posicao.y = transform.position.y;
 
         return posicao;
+    }
+
+    /// <summary>
+    /// Retorna um boolean com positivo caso o limite máximo de zumbis em cena não tenha sido atingido.
+    /// </summary>
+    /// <returns></returns>
+    private bool isPermitidoGerarNovosZumbis() {
+        return qtdDeZumbisEmCena < qtdMaximaZumbisEmCena;
+    }
+
+    public void diminuirQtdZumbisEmCena() {
+        qtdDeZumbisEmCena--;
     }
 }

@@ -7,6 +7,7 @@ public class JogadorController : MonoBehaviour, IMatavel, ICuravel {
     public AudioClip somDeDano;
     private MovimentacaoJogador _movimentacaoJogador;
     private AnimacaoPersonagemController _animacaoPersonagemController;
+    [HideInInspector]
     public Status status;
 
     /// <summary>

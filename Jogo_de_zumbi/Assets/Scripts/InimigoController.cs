@@ -15,6 +15,8 @@ public class InimigoController : MonoBehaviour, IMatavel {
     private float _porcentagemGerarKitMedico = 0.1f;
     public GameObject kitMedico;
     private UIController _uIController;
+    [HideInInspector]
+    public GeradorZumbis meuGeradorZumbi;
 
     private void Start() {
         _movimentacaoController = GetComponent<MovimentacaoPersonagemController>();
@@ -137,11 +139,13 @@ public class InimigoController : MonoBehaviour, IMatavel {
     /// Ativa o som de morte e destrói o gameobject.
     /// Chama o método com uma chance de dropar um kit médico.
     /// informa para o controlador de interface que um zumbi foi morto.
+    /// decrementa a quantidade de zumbis em cena no gerador de origem.
     /// </summary>
     public void morrer() {
         AudioController.audioSourceGeral.PlayOneShot(somMorte);
         gerarKitMedico(_porcentagemGerarKitMedico);
         _uIController.atualizarQtdZumbisMortos();
+        meuGeradorZumbi.diminuirQtdZumbisEmCena();
         Destroy(gameObject);
     }
 
