@@ -17,11 +17,16 @@ public class BalaController : MonoBehaviour {
 
     /// <summary>
     /// Ao colidir com outro objeto a bala é destruída, se o outro objeto for um inimigo ele também é destruído.
+    /// Se o outro objeto for um chefe, ele sofre uma quantia de dano.
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.CompareTag(Tags.Inimigo)) {
+        var obj = other.gameObject;
+
+        if(obj.CompareTag(Tags.Inimigo)) {
             other.GetComponent<InimigoController>().sofrerDano(_qtdDano);
+        } else if(obj.CompareTag(Tags.Chefe)) {
+            other.GetComponent<ChefeController>().sofrerDano(_qtdDano);
         }
 
         Destroy(gameObject);

@@ -16550,6 +16550,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4762195290478695271, guid: 329c2989a95d70a468e6fe870a1fc7e4,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191384925183893299, guid: 329c2989a95d70a468e6fe870a1fc7e4,
+        type: 3}
+      propertyPath: velocidade
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191384925183893299, guid: 329c2989a95d70a468e6fe870a1fc7e4,
+        type: 3}
+      propertyPath: vidaTotal
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7489627255248970880, guid: 329c2989a95d70a468e6fe870a1fc7e4,
         type: 3}
       propertyPath: m_Height
@@ -16559,6 +16574,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7489627255248970880, guid: 329c2989a95d70a468e6fe870a1fc7e4,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 329c2989a95d70a468e6fe870a1fc7e4, type: 3}

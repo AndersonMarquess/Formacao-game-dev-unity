@@ -33,7 +33,7 @@ public class MovimentacaoPersonagemController : MonoBehaviour {
     /// <summary>
     ///Desabilita as travas do rigitbody
     /// </summary>
-    public void Morrer() {
+    public void morrer() {
         //_rigidbody.constraints = RigidbodyConstraints.None;
         _rigidbody.velocity = Vector3.zero;
         GetComponent<Collider>().enabled = false;

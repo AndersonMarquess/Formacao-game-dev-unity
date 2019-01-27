@@ -149,7 +149,7 @@ public class InimigoController : MonoBehaviour, IMatavel {
         _uIController.atualizarQtdZumbisMortos();
         meuGeradorZumbi.diminuirQtdZumbisEmCena();
         _animacaoPersonagemController.tocarAnimMorrer();
-        _movimentacaoController.Morrer();
+        _movimentacaoController.morrer();
         this.enabled = false; //impedi que o zumbi continue seguindo o jogador "após a morte".
     }
 
