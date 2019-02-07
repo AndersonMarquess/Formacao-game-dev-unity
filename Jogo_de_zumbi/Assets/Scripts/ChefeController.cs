@@ -8,6 +8,7 @@ public class ChefeController : MonoBehaviour, IMatavel {
     private Status _status;
     private AnimacaoPersonagemController _animPersonagem;
     private MovimentacaoPersonagemController _moviPersonagem;
+    public GameObject kitMedico;
 
     private void Start() {
         transform.tag = Tags.Chefe;
@@ -83,6 +84,7 @@ public class ChefeController : MonoBehaviour, IMatavel {
     public void morrer() {
         _animPersonagem.tocarAnimMorrer();
         _moviPersonagem.morrer();
+        Instantiate(kitMedico, transform.position, Quaternion.identity);
         this.enabled = false;
         _agent.enabled = false;
         Destroy(gameObject, 1.5f);

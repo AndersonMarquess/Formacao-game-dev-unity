@@ -26,7 +26,7 @@ public class InimigoController : MonoBehaviour, IMatavel {
         //Procura na cena o objeto do tipo especificado
         _uIController = FindObjectOfType(typeof(UIController)) as UIController;
 
-        int posicaoSkin = Random.Range(1, 27);//Vai de 1 até 26
+        int posicaoSkin = Random.Range(1, transform.childCount);//Vai de 1 até a quantidade de objetos filhos
         escolherSkin(posicaoSkin);
     }
 
